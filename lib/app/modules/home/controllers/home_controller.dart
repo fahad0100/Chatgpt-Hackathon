@@ -4,12 +4,14 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   //TODO: Implement HomeController
 
+  bool isNamewrite = false;
+  bool isExpwrite = false;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController countryController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
-  final TextEditingController dataBrithdayController = TextEditingController();
+  // final TextEditingController dataBrithdayController = TextEditingController();
   final TextEditingController universityController = TextEditingController();
   final TextEditingController universitySpecializationController =
       TextEditingController();
@@ -48,16 +50,24 @@ class HomeController extends GetxController {
   //------------Method-----------------
   collectionExper() {
     var experiences =
-        '${listOFexperiences.length + 1}: ${experiencesFieldController.text} \nfrom:${experiencesDateFromController.text} to:${experiencesDateToController.text}';
-    print(experiences);
+        ' ${experiencesFieldController.text} \nFrom: ${experiencesDateFromController.text} To: ${experiencesDateToController.text}';
     listOFexperiences.add(experiences);
+    experiencesFieldController.text = '';
+    experiencesDateToController.text = '';
+    experiencesDateFromController.text = '';
+    update();
+  }
+
+  collectionSkills() {
+    listOFSkills.add(skillController.text);
+    skillController.text = '';
+    update();
     update();
   }
 
   collectionDataUser() {
     List<String> dataUsers = [];
-    var personInformation =
-        'Name: ${nameController.text}, Data Birthday: ${dataBrithdayController.text}. \n';
+    var personInformation = 'Name: ${nameController.text}. \n';
     dataUsers.add(personInformation);
     var contact =
         'Phone Number: ${phoneController.text}, Email: ${emailController.text}. \n';
@@ -77,10 +87,6 @@ class HomeController extends GetxController {
     dataUsers.add(experiences);
     var skills = 'Skills: ${listOFSkills}. \n';
     dataUsers.add(skills);
-
-    print('---------');
-    print(dataUsers);
-    print('---------');
     return dataUsers;
   }
 }

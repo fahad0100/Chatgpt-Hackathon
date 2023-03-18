@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-methodCreateResume({String? data}) async {
+createJobTitle({String? data}) async {
   Uri url =
       Uri.parse('https://experimental.willow.vectara.io/v1/chat/completions');
   var headers = {
@@ -14,9 +14,9 @@ methodCreateResume({String? data}) async {
     "model": "gpt-3.5-turbo",
     "messages": [
       {
-        "role": "user",
+        "role": "assistant",
         "content":
-            "Create a professional CV for me, making sure to include (Personal information, summary, education, technical and soft skills, and also Career Interests) for me from this data provided \"${data}\""
+            "write only title of the best job title from this data \"${data}\""
       }
     ]
   };
@@ -29,6 +29,5 @@ methodCreateResume({String? data}) async {
 
   String reusme = dataList['choices'][0]['message']['content'];
 
-  print(reusme);
   return reusme;
 }

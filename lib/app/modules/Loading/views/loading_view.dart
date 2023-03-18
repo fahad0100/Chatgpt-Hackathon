@@ -17,7 +17,7 @@ class LoadingView extends GetView<LoadingController> {
       children: [
         Center(
             child: LoadingAnimationWidget.threeArchedCircle(
-                color: Colors.red, size: 50)),
+                color: Color.fromARGB(255, 237, 175, 131), size: 50)),
         SizedBox(
           height: 10,
         ),
@@ -25,7 +25,8 @@ class LoadingView extends GetView<LoadingController> {
           animatedTexts: [
             WavyAnimatedText('Loading ...',
                 textStyle: GoogleFonts.lato(
-                    color: Colors.red, fontWeight: FontWeight.bold)),
+                    color: Color.fromARGB(255, 237, 175, 131),
+                    fontWeight: FontWeight.bold)),
           ],
           isRepeatingAnimation: true,
           onTap: () {
@@ -57,4 +58,3 @@ class LoadingView extends GetView<LoadingController> {
     ));
   }
 }
-

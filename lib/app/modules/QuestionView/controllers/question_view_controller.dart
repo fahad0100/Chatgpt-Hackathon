@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
+import 'package:hackathon_chatgpt/app/Server/Request/createQuestion.dart';
 
 class QuestionViewController extends GetxController {
   //TODO: Implement QuestionViewController
 
-  final count = 0.obs;
+  RxList questions = [].obs;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    await getQuestionsFromGPT();
   }
 
   @override
@@ -19,5 +21,8 @@ class QuestionViewController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  getQuestionsFromGPT() async {
+    var getQ = await methodCreateQuestion(data: Get.arguments);
+    questions.value = getQ.trim().split('\n');
+  }
 }

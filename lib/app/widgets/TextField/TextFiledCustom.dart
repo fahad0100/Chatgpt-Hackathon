@@ -9,19 +9,24 @@ class TextFiledCustom extends StatelessWidget {
       required this.title,
       this.width = 0,
       this.controller,
-      this.hintText});
+      this.hintText,
+      this.onChanged});
   final String title;
   double width;
   final TextEditingController? controller;
   final String? hintText;
-
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     width = width == 0 ? Get.width : width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextUtils(text: title),
+        TextUtils(
+          text: title,
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+        ),
         SizedBox(
           height: 8,
         ),
@@ -30,6 +35,7 @@ class TextFiledCustom extends StatelessWidget {
           width: width,
           child: TextField(
             controller: controller,
+            onChanged: onChanged,
             style: GoogleFonts.karla(
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w400),
             decoration: InputDecoration(
@@ -37,6 +43,8 @@ class TextFiledCustom extends StatelessWidget {
               filled: true,
               fillColor: Color(0xffebe1da),
               hintText: hintText,
+              hintStyle: GoogleFonts.karla(
+                  fontSize: 16, color: Colors.grey.withOpacity(0.5)),
               border: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Color(0xffebe1da),

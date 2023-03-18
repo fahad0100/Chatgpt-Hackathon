@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hackathon_chatgpt/app/Server/Request/createCV.dart';
 import 'package:hackathon_chatgpt/app/routes/app_pages.dart';
 import 'package:hackathon_chatgpt/app/widgets/Buttons/ButtonCustom.dart';
 import 'package:hackathon_chatgpt/app/widgets/TextField/TextFiledCustom.dart';
 import 'package:hackathon_chatgpt/app/widgets/TextField/TextFiledPhoneCustom.dart';
-import 'package:hackathon_chatgpt/app/widgets/TextField/TextFiledWithButtonCustom.dart';
 import 'package:hackathon_chatgpt/app/widgets/Texts/TextUtils.dart';
-import 'package:simple_chips_input/select_chips_input.dart';
-import 'package:simple_chips_input/simple_chips_input.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -22,43 +18,48 @@ class HomeView extends GetView<HomeController> {
         body: ListView(
           children: [
             const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextUtils(
-                  text: "Create your CV",
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
-            ),
-            Padding(
               padding: EdgeInsets.all(16.0),
               child: TextUtils(
                   text: "Person Information",
                   fontSize: 20,
+                  isShadow: true,
                   fontWeight: FontWeight.w800),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFiledCustom(
                 controller: controller.nameController,
+                onChanged: (name) {
+                  if (name.length > 2) {
+                    controller.isNamewrite = true;
+                  } else {
+                    controller.isNamewrite = false;
+                  }
+                  controller.update();
+                },
                 hintText: 'Full Name',
                 title: "NAME",
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: TextFiledCustom(
-                controller: controller.dataBrithdayController,
-                hintText: '10/10/1994',
-                title: "DATE OF BIRTHDAY",
-              ),
-            ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 8),
+            //   child: TextFiledCustom(
+            //     controller: controller.dataBrithdayController,
+            //     hintText: '10/10/1994',
+            //     title: "DATE OF BIRTHDAY",
+            //   ),
+            // ),
             const Padding(
               padding:
                   EdgeInsets.only(left: 16, right: 16, top: 26, bottom: 10),
               child: TextUtils(
-                  text: "Contact", fontSize: 20, fontWeight: FontWeight.w800),
+                  isShadow: true,
+                  text: "Contact",
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -68,7 +69,7 @@ class HomeView extends GetView<HomeController> {
                 title: "EMAIL",
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
@@ -82,7 +83,10 @@ class HomeView extends GetView<HomeController> {
               padding:
                   EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 20),
               child: TextUtils(
-                  text: "Address", fontSize: 20, fontWeight: FontWeight.w800),
+                  isShadow: true,
+                  text: "Address",
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -108,7 +112,10 @@ class HomeView extends GetView<HomeController> {
               padding:
                   EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 20),
               child: TextUtils(
-                  text: "Education", fontSize: 20, fontWeight: FontWeight.w800),
+                  isShadow: true,
+                  text: "Education",
+                  fontSize: 20,
+                  fontWeight: FontWeight.w800),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -177,7 +184,7 @@ class HomeView extends GetView<HomeController> {
                           },
                           alignment: Alignment.center,
                           iconSize: 40,
-                          icon: Icon(Icons.add)),
+                          icon: const Icon(Icons.add)),
                     )
                   ],
                 ),
@@ -194,9 +201,11 @@ class HomeView extends GetView<HomeController> {
                         (index) => InputChip(
                           label:
                               Text(controller.listOFpostionIntersting[index]),
-                          deleteIconColor: Colors.red,
+                          deleteIconColor:
+                              const Color.fromARGB(255, 222, 158, 112),
                           backgroundColor: Colors.white,
-                          side: BorderSide(color: Colors.black),
+                          side: const BorderSide(
+                              color: Color(0xffEBE1DA), width: 3),
                           onDeleted: () {
                             controller.listOFpostionIntersting.removeAt(index);
                             controller.update();
@@ -209,6 +218,7 @@ class HomeView extends GetView<HomeController> {
                   EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 20),
               child: TextUtils(
                   text: "Experiences",
+                  isShadow: true,
                   fontSize: 20,
                   fontWeight: FontWeight.w800),
             ),
@@ -225,11 +235,17 @@ class HomeView extends GetView<HomeController> {
                             controller.listOFexperiences[index],
                             textAlign: TextAlign.start,
                             maxLines: 4,
-                            style: TextStyle(),
+                            softWrap: true,
+                            style: const TextStyle(
+                                height: 2, overflow: TextOverflow.ellipsis),
                           ),
-                          deleteIconColor: Colors.red,
+                          deleteIconColor:
+                              const Color.fromARGB(255, 222, 158, 112),
                           backgroundColor: Colors.white,
-                          side: BorderSide(color: Colors.black),
+                          padding: const EdgeInsets.only(
+                              left: 20, top: 4, bottom: 4),
+                          side: const BorderSide(
+                              color: Color(0xffEBE1DA), width: 3),
                           onDeleted: () {
                             controller.listOFexperiences.removeAt(index);
                             controller.update();
@@ -243,6 +259,14 @@ class HomeView extends GetView<HomeController> {
                 height: 90,
                 child: TextFiledCustom(
                   controller: controller.experiencesFieldController,
+                  onChanged: (exp) {
+                    if (exp.length > 5) {
+                      controller.isExpwrite = true;
+                    } else {
+                      controller.isExpwrite = false;
+                    }
+                    controller.update();
+                  },
                   hintText: 'ِExample: Software engineering at SDAIA',
                   title: "Experiences Position",
                 ),
@@ -262,7 +286,7 @@ class HomeView extends GetView<HomeController> {
                         title: "From",
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Flexible(
@@ -277,37 +301,27 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
-            Center(
-              child: Container(
-                width: 100,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Color(0xff383230),
-                    width: 2,
-                  ),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0xff383230),
-                      blurRadius: 0,
-                      offset: Offset(4, 4),
-                    ),
-                  ],
-                  color: Color(0xffcf8e55),
-                ),
-                child: TextButton(
-                  onPressed: () {
-                    print(controller.collectionExper());
-                  },
-                  child: Text(
-                    "Add",
-                    style: GoogleFonts.aboreto(
-                        color: Colors.black, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+            GetBuilder<HomeController>(
+              init: HomeController(),
+              initState: (_) {},
+              builder: (_) {
+                return ButtonCustom(
+                  height: 30,
+                  width: 100,
+                  enable: controller.isExpwrite == true ? true : false,
+                  color:
+                      controller.isExpwrite ? Color(0xffcf8e55) : Colors.white,
+                  onPressed: controller.isExpwrite == true
+                      ? () {
+                          controller.collectionExper();
+                          controller.isExpwrite = false;
+                        }
+                      : () {},
+                  title: 'Add',
+                );
+              },
             ),
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: SizedBox(
@@ -332,14 +346,11 @@ class HomeView extends GetView<HomeController> {
                                 controller.skillController.text.length < 2) {
                               return;
                             }
-                            controller.listOFSkills
-                                .add(controller.skillController.text);
-                            controller.skillController.text = '';
-                            controller.update();
+                            controller.collectionSkills();
                           },
                           alignment: Alignment.center,
                           iconSize: 40,
-                          icon: Icon(Icons.add)),
+                          icon: const Icon(Icons.add)),
                     )
                   ],
                 ),
@@ -357,7 +368,7 @@ class HomeView extends GetView<HomeController> {
                           label: Text(controller.listOFSkills[index]),
                           deleteIconColor: Colors.red,
                           backgroundColor: Colors.white,
-                          side: BorderSide(color: Colors.black),
+                          side: const BorderSide(color: Colors.black),
                           onDeleted: () {
                             controller.listOFSkills.removeAt(index);
                             controller.update();
@@ -368,19 +379,32 @@ class HomeView extends GetView<HomeController> {
             const SizedBox(
               height: 25,
             ),
-            ButtonCustom(
-              onPressed: () async {
-                var listUsers = await controller.collectionDataUser();
-                var dataUser = '';
+            GetBuilder<HomeController>(
+              init: HomeController(),
+              builder: (_) => ButtonCustom(
+                color: controller.isNamewrite == true
+                    ? Color(0xffcf8e55)
+                    : Colors.white,
+                enable: controller.isNamewrite == true ? true : false,
+                onPressed: controller.isNamewrite
+                    ? () async {
+                        if (controller.nameController.text.isEmpty) {
+                          return;
+                        }
+                        var listUsers = await controller.collectionDataUser();
+                        var dataUser = '';
 
-                for (var element in listUsers) {
-                  print(element);
-                  dataUser = dataUser + " " + element;
-                }
-                print('wite....');
-                var resume = await methodCreateResume(data: dataUser);
-                Get.toNamed(Routes.DISPLAY_RESUME, arguments: resume);
-              },
+                        for (var element in listUsers) {
+                          dataUser = dataUser + " " + element;
+                        }
+
+                        Get.toNamed(Routes.DISPLAY_RESUME, arguments: [
+                          controller.nameController.text,
+                          dataUser
+                        ]);
+                      }
+                    : null,
+              ),
             ),
             const SizedBox(
               height: 25,

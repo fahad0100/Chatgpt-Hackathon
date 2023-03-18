@@ -22,8 +22,8 @@ class TextFiledPhoneCustom extends StatelessWidget {
         ),
         Row(
           children: [
-            SizedBox(width: width / 10, child: TextUtils(text: "+966")),
-            SizedBox(
+            SizedBox(width: width / 10, child: const TextUtils(text: "+966")),
+            const SizedBox(
               width: 8,
             ),
             SizedBox(
@@ -37,21 +37,24 @@ class TextFiledPhoneCustom extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.w400),
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.all(10),
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(10),
                   filled: true,
-                  fillColor: Color(0xffEBE1DA),
-                  border: OutlineInputBorder(
+                  hintText: '0555555555',
+                  hintStyle: GoogleFonts.karla(
+                      fontSize: 16, color: Colors.grey.withOpacity(0.5)),
+                  fillColor: const Color(0xffEBE1DA),
+                  border: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0xffEBE1DA),
                     ),
                   ),
-                  enabledBorder: OutlineInputBorder(
+                  enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0x7fc3bab7),
                     ),
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Color(0x7fc3bab7),
                     ),

@@ -7,6 +7,7 @@ abstract class Routes {
   static const LOADING = _Paths.LOADING;
   static const DISPLAY_RESUME = _Paths.DISPLAY_RESUME;
   static const QUESTION_VIEW = _Paths.QUESTION_VIEW;
+  static const START_SCREEN = _Paths.START_SCREEN;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const LOADING = '/loading';
   static const DISPLAY_RESUME = '/display-resume';
   static const QUESTION_VIEW = '/question-view';
+  static const START_SCREEN = '/start-screen';
 }
